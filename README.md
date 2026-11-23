@@ -25,6 +25,9 @@ reparten por el método del mayor resto, así que el total queda en 60/20/20
 - `src/preprocesado/color.py`: canales de color, distancia circular del matiz al
   rojo, candidatos a "gris de manzana" y retroproyección del histograma 2D.
   Las reutilizará el preprocesado (P5/P6).
+- `src/caracteristicas/textura.py`: desviación local, Sobel, Laplaciana de la
+  Gaussiana, LBP, contraste LBP y retroproyección de códigos LBP (características
+  para los modelos supervisados).
 - `src/preprocesado/ruido.py`: estimación de ruido (Immerkær, sal y pimienta) y
   simulación de ruido para el experimento de robustez.
 
@@ -49,7 +52,7 @@ Todo el EDA está en un único notebook, [`experimentos/eda.ipynb`](./experiment
 que explica y justifica cada paso y termina con una tabla de decisiones para el
 preprocesado, los modelos y las métricas. No usa el split de test. Para
 abrirlo, selecciona el kernel *Python (segmentacion-manzanas)*; para volver a
-ejecutarlo entero desde la terminal (≈20 s):
+ejecutarlo entero desde la terminal (≈40 s):
 
 ```powershell
 .\.venv-project\Scripts\jupyter-nbconvert.exe --to notebook --execute --inplace experimentos/eda.ipynb
@@ -57,7 +60,7 @@ ejecutarlo entero desde la terminal (≈20 s):
 
 Secciones: verificación del dataset · variedades · split · desbalanceo ·
 separabilidad de canales por variedad · candidatos a "gris de manzana" ·
-tamaño y forma de las manzanas · iluminación, sobreexposición y ruido ·
+textura (LBP, Sobel, desviación local) · tamaño y forma de las manzanas · iluminación, sobreexposición y ruido ·
 anotaciones incompletas · conclusiones. Las figuras y tablas se guardan también
 en `resultados/eda/` para la memoria.
 

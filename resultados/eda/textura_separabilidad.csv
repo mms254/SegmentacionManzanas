@@ -1,0 +1,25 @@
+caracteristica,variedad,frente_a,auc,sentido
+Desviación local,todas,fondo,0.683052644522823,mayor
+Desviación local,todas,confuso,0.5474144336373521,menor
+Desviación local,amarilla,confuso,0.545397618842433,menor
+Desviación local,roja,confuso,0.6789790521364338,menor
+Sobel (media local),todas,fondo,0.6399774605067728,mayor
+Sobel (media local),todas,confuso,0.6009209940521187,menor
+Sobel (media local),amarilla,confuso,0.5921544329385818,menor
+Sobel (media local),roja,confuso,0.7125208659175954,menor
+|LoG| σ=2 (media local),todas,fondo,0.7869431577856458,mayor
+|LoG| σ=2 (media local),todas,confuso,0.543886412525291,mayor
+|LoG| σ=2 (media local),amarilla,confuso,0.5761024604785203,mayor
+|LoG| σ=2 (media local),roja,confuso,0.667627152848939,menor
+Contraste LBP (media local),todas,fondo,0.59664618797198,mayor
+Contraste LBP (media local),todas,confuso,0.6350189777108728,menor
+Contraste LBP (media local),amarilla,confuso,0.631665460172727,menor
+Contraste LBP (media local),roja,confuso,0.7260873677737907,menor
+Retroproyección LBP,todas,fondo,0.9012599024344938,mayor
+Retroproyección LBP,todas,confuso,0.7924426890018956,mayor
+Retroproyección LBP,amarilla,confuso,0.7945954199562624,mayor
+Retroproyección LBP,roja,confuso,0.7185570828749482,mayor
+Retroproyección LBP (gris suavizado σ=1),todas,fondo,0.8582453831566039,mayor
+Retroproyección LBP (gris suavizado σ=1),todas,confuso,0.7117336927223437,mayor
+Retroproyección LBP (gris suavizado σ=1),amarilla,confuso,0.7310869304829682,mayor
+Retroproyección LBP (gris suavizado σ=1),roja,confuso,0.5935204843887171,mayor
