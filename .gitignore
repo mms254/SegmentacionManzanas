@@ -153,6 +153,7 @@ activemq-data/
 .env
 .envrc
 .venv
+.venv-*
 env/
 venv/
 ENV/
@@ -210,6 +211,9 @@ tempCodeRunnerFile.py
 
 # Ruff stuff:
 .ruff_cache/
+
+# Local NumPy cache for the apple dataset
+.cache/
 
 # PyPI configuration file
 .pypirc
