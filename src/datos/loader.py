@@ -154,6 +154,21 @@ def load_dataset(
     return samples
 
 
+def _split_counts(total: int, ratios: tuple[float, float, float]) -> tuple[int, int, int]:
+    """Reparte `total` según `ratios` con el método del mayor resto.
+
+    El redondeo hacia abajo de cada proporción pierde imágenes (p. ej. 66 →
+    39/13/13 = 65); las sobrantes se asignan a los splits con mayor parte decimal,
+    de modo que con 66 + 34 imágenes el total queda exactamente en 60/20/20.
+    """
+    exact = [total * ratio for ratio in ratios]
+    counts = [int(np.floor(value)) for value in exact]
+    remainders = [value - count for value, count in zip(exact, counts)]
+    for index in sorted(range(3), key=lambda i: (-remainders[i], i))[: total - sum(counts)]:
+        counts[index] += 1
+    return counts[0], counts[1], counts[2]
+
+
 def stratified_split(
     samples: list[DatasetSample],
     seed: int = RANDOM_SEED,
@@ -182,8 +197,7 @@ def stratified_split(
                 "estar representada en train, validation y test."
             )
         shuffled_ids = rng.permutation(ids)
-        train_count = int(len(ids) * train_ratio)
-        validation_count = int(len(ids) * validation_ratio)
+        train_count, validation_count, _ = _split_counts(len(ids), ratios)
         if train_count == 0 or validation_count == 0 or train_count + validation_count >= len(ids):
             raise ValueError(
                 f"No se pueden representar los tres splits en la variedad '{variety}' "

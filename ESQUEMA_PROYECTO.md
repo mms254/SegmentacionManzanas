@@ -10,7 +10,7 @@
 | Tarea | 100 imágenes RGB + 100 máscaras binarias {0,255} | **Segmentación semántica binaria a nivel de píxel** (manzana / fondo) |
 | Tamaño | 720×1280 (vertical), todas iguales | Reescalar ×0.5 para entrenar y ajustar (más rápido); evaluar a resolución original |
 | Desbalanceo | Píxeles de manzana: **0,2 % – 10 %** (media ≈ 4,3 %) | La *accuracy* engaña (~96 % prediciendo todo fondo). Métricas principales: F1/Dice, IoU, MCC y PR-AUC |
-| Variedades | Manzanas **amarillo-verdosas** (imágenes 0–~50) y **rojas** (resto) | El fondo verde (hojas, césped) se confunde con la manzana verde, por lo que el **color es clave**. Hay que estratificar el split por variedad |
+| Variedades | Manzanas **amarillo-verdosas** (`img_000`–`img_065`, 66 imágenes) y **rojas** (`img_066`–`img_099`, 34), comprobado con el color de las máscaras | El fondo verde (hojas, césped) se confunde con la manzana verde, por lo que el **color es clave**. Hay que estratificar el split por variedad |
 | Origen probable | Parece un subconjunto de **MinneApple** (Häni et al., 2020) | Hay métodos clásicos de referencia publicados sobre este mismo tipo de imágenes |
 
 **Restricción del enunciado:** solo técnicas tradicionales vistas en la asignatura (temas 2–7). No se usa sklearn: todo con OpenCV (`cv2`, `cv2.ml`) y NumPy, más Matplotlib/PIL. Optuna lo sugiere el profesor para el ajuste de hiperparámetros.
@@ -216,7 +216,7 @@ proyecto/
 │   └── visualizacion/
 │       └── graficas.py          # overlays, curvas, barras, tablas a LaTeX/Markdown
 ├── experimentos/
-│   ├── eda.py                   # histogramas por canal + separabilidad (varianza inter/intraclase)
+│   ├── eda.ipynb                # EDA completo y explicado (notebook único)
 │   ├── ablacion_preprocesado.py # §6.1
 │   ├── experimentos_E1_E4.py    # §6.2
 │   └── robustez_ruido.py        # §3.1

@@ -5,7 +5,7 @@ from pathlib import Path
 import cv2
 import numpy as np
 
-from src.datos.loader import DatasetSample, load_dataset, stratified_split
+from src.datos.loader import DatasetSample, _variety_for, load_dataset, stratified_split
 
 
 class DatasetLoaderTests(unittest.TestCase):
@@ -66,6 +66,32 @@ class DatasetLoaderTests(unittest.TestCase):
         for ids in (split.train, split.validation, split.test):
             yellow_count = sum(int(image_id[-3:]) < 50 for image_id in ids)
             self.assertEqual(yellow_count * 2, len(ids))
+
+    def test_split_keeps_60_20_20_with_unbalanced_varieties(self) -> None:
+        samples = [
+            DatasetSample(
+                image_id=f"img_{index:03d}",
+                image=np.zeros((1, 1, 3), dtype=np.uint8),
+                mask=np.zeros((1, 1), dtype=bool),
+                variety="amarilla" if index <= 65 else "roja",
+            )
+            for index in range(100)
+        ]
+
+        split = stratified_split(samples, seed=42)
+
+        self.assertEqual(
+            (len(split.train), len(split.validation), len(split.test)), (60, 20, 20)
+        )
+        all_ids = split.train + split.validation + split.test
+        self.assertEqual(len(set(all_ids)), 100)
+        for ids in (split.train, split.validation, split.test):
+            red_count = sum(int(image_id[-3:]) > 65 for image_id in ids)
+            self.assertGreaterEqual(red_count, 6)
+
+    def test_real_dataset_variety_boundary(self) -> None:
+        self.assertEqual(_variety_for("img_065"), "amarilla")
+        self.assertEqual(_variety_for("img_066"), "roja")
 
 
 if __name__ == "__main__":
